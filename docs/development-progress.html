@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>Development Progress</title>
+</head>
+<body>
+  <h1>Development Progress</h1>
+
+  <h2>Current status</h2>
+  <p>Phase 0 is active. The original main design document has been split into phase-specific design files, and the main design file now acts as the navigation index. The project is being initialized and maintained in git with GitHub as the remote.</p>
+
+  <h2>Completed work</h2>
+  <ul>
+    <li>Reworked <code>docs/main_design_intend.md</code> into a navigation-only design index.</li>
+    <li>Created <code>docs/phases/</code> with one file per phase from Phase 0 through Phase 11.</li>
+    <li>Added this progress page so future agents can resume from explicit project state.</li>
+    <li>Initialized the repository on the <code>main</code> branch for GitHub maintenance.</li>
+  </ul>
+
+  <h2>Files changed</h2>
+  <ul>
+    <li><code>docs/main_design_intend.md</code></li>
+    <li><code>docs/development-progress.html</code></li>
+    <li><code>docs/phases/phase-00-project-intent.md</code></li>
+    <li><code>docs/phases/phase-01-project-skeleton.md</code></li>
+    <li><code>docs/phases/phase-02-local-database-core-model.md</code></li>
+    <li><code>docs/phases/phase-03-provider-mock-llm.md</code></li>
+    <li><code>docs/phases/phase-04-mcp-server-v1.md</code></li>
+    <li><code>docs/phases/phase-05-web-ui-content-system.md</code></li>
+    <li><code>docs/phases/phase-06-web-ui-learning-items-crud.md</code></li>
+    <li><code>docs/phases/phase-07-native-language-personalized-content.md</code></li>
+    <li><code>docs/phases/phase-08-daily-check-in-calendar.md</code></li>
+    <li><code>docs/phases/phase-09-gateway-telegram-adapter.md</code></li>
+    <li><code>docs/phases/phase-10-training-memory-reuse.md</code></li>
+    <li><code>docs/phases/phase-11-legacy-python-handling.md</code></li>
+  </ul>
+
+  <h2>Open questions</h2>
+  <ul>
+    <li>None for the documentation split.</li>
+  </ul>
+
+  <h2>Known issues</h2>
+  <ul>
+    <li>The repository currently has no package, build, test, or lint scripts.</li>
+    <li>The directory is not currently a git repository, so git status could not be used for change review.</li>
+  </ul>
+
+  <h2>Checks</h2>
+  <ul>
+    <li>Read <code>docs/main_design_intend.md</code> using UTF-8 encoding.</li>
+    <li>Confirmed <code>docs/development-progress.html</code> did not previously exist.</li>
+    <li>Attempted <code>git status --short</code>; it failed because this directory is not a git repository.</li>
+    <li>Listed <code>docs/phases/</code> and confirmed Phase 0 through Phase 11 files exist.</li>
+    <li>Searched <code>docs/main_design_intend.md</code> and confirmed the navigation index includes Phase 0 through Phase 11.</li>
+    <li>Searched this progress page and confirmed it records current status, checks, and next step.</li>
+    <li>Initialized git with <code>git init -b main</code>.</li>
+    <li>No automated build, test, or lint checks are available yet.</li>
+  </ul>
+
+  <h2>Next step</h2>
+  <p>Continue Phase 0 by creating <code>docs/design-intent.md</code> and <code>docs/implementation-slices.md</code> from the Phase 0 design file, then ask the user to confirm the design intent before moving to Phase 1.</p>
+</body>
+</html>
