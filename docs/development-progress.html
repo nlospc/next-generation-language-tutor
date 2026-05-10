@@ -8,7 +8,7 @@
   <h1>Development Progress</h1>
 
   <h2>Current status</h2>
-  <p>Phase 0 is active. The original main design document has been split into phase-specific design files, and the main design file now acts as the navigation index. The project is initialized in git on the <code>main</code> branch with GitHub configured as the remote.</p>
+  <p>Phase 0 is active. The original main design document has been split into phase-specific design files, and the main design file now acts as the navigation index. The project is initialized in git on the <code>main</code> branch with GitHub configured as the remote. The existing GitHub <code>main</code> history has been fetched and merged locally.</p>
 
   <h2>Completed work</h2>
   <ul>
@@ -18,6 +18,7 @@
     <li>Initialized the repository on the <code>main</code> branch for GitHub maintenance.</li>
     <li>Configured <code>origin</code> as <code>git@github.com:nlospc/next-generation-language-tutor.git</code>.</li>
     <li>Created the initial local git commit.</li>
+    <li>Fetched GitHub <code>main</code> and merged the existing remote initialization commit, preserving its MIT <code>LICENSE</code>.</li>
   </ul>
 
   <h2>Files changed</h2>
@@ -36,6 +37,7 @@
     <li><code>docs/phases/phase-09-gateway-telegram-adapter.md</code></li>
     <li><code>docs/phases/phase-10-training-memory-reuse.md</code></li>
     <li><code>docs/phases/phase-11-legacy-python-handling.md</code></li>
+    <li><code>LICENSE</code></li>
   </ul>
 
   <h2>Open questions</h2>
@@ -46,7 +48,7 @@
   <h2>Known issues</h2>
   <ul>
     <li>The repository currently has no package, build, test, or lint scripts.</li>
-    <li>SSH push to GitHub is blocked inside the current sandbox unless external network execution is approved.</li>
+    <li>None for the current documentation and git setup work.</li>
   </ul>
 
   <h2>Checks</h2>
@@ -62,6 +64,8 @@
     <li>Set remote origin to <code>git@github.com:nlospc/next-generation-language-tutor.git</code>.</li>
     <li>Attempted <code>git push -u origin main</code>; it failed with SSH port 22 permission denied in the sandbox.</li>
     <li>Requested escalated network execution for <code>git push -u origin main</code>; automatic approval review timed out.</li>
+    <li>Fetched <code>origin/main</code> and confirmed the remote initialization commit contains only <code>LICENSE</code>.</li>
+    <li>Merged <code>origin/main</code> with <code>--allow-unrelated-histories</code>; no conflicts occurred.</li>
     <li>No automated build, test, or lint checks are available yet.</li>
   </ul>
 
