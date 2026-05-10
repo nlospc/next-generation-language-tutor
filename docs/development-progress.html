@@ -8,7 +8,7 @@
   <h1>Development Progress</h1>
 
   <h2>Current status</h2>
-  <p>Phase 0 is active. The original main design document has been split into phase-specific design files, and the main design file now acts as the navigation index. The project is initialized in git on the <code>main</code> branch with GitHub configured as the remote. The existing GitHub <code>main</code> history has been fetched and merged locally.</p>
+  <p>Phase 0 is active. The original main design document has been split into phase-specific design files, and the main design file now acts as the navigation index. The project is initialized in git on the <code>main</code> branch with GitHub configured as the remote. The existing GitHub <code>main</code> history has been fetched, merged, and pushed back to GitHub.</p>
 
   <h2>Completed work</h2>
   <ul>
@@ -19,6 +19,7 @@
     <li>Configured <code>origin</code> as <code>git@github.com:nlospc/next-generation-language-tutor.git</code>.</li>
     <li>Created the initial local git commit.</li>
     <li>Fetched GitHub <code>main</code> and merged the existing remote initialization commit, preserving its MIT <code>LICENSE</code>.</li>
+    <li>Pushed local <code>main</code> to GitHub and set upstream tracking to <code>origin/main</code>.</li>
   </ul>
 
   <h2>Files changed</h2>
@@ -66,6 +67,7 @@
     <li>Requested escalated network execution for <code>git push -u origin main</code>; automatic approval review timed out.</li>
     <li>Fetched <code>origin/main</code> and confirmed the remote initialization commit contains only <code>LICENSE</code>.</li>
     <li>Merged <code>origin/main</code> with <code>--allow-unrelated-histories</code>; no conflicts occurred.</li>
+    <li>Ran <code>git push --set-upstream origin main</code>; push succeeded and <code>main</code> now tracks <code>origin/main</code>.</li>
     <li>No automated build, test, or lint checks are available yet.</li>
   </ul>
 
