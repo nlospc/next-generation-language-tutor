@@ -8,7 +8,7 @@
   <h1>Development Progress</h1>
 
   <h2>Current status</h2>
-  <p>Phase 0 is active. The original main design document has been split into phase-specific design files, and the main design file now acts as the navigation index. The project is being initialized and maintained in git with GitHub as the remote.</p>
+  <p>Phase 0 is active. The original main design document has been split into phase-specific design files, and the main design file now acts as the navigation index. The project is initialized in git on the <code>main</code> branch with GitHub configured as the remote.</p>
 
   <h2>Completed work</h2>
   <ul>
@@ -16,6 +16,8 @@
     <li>Created <code>docs/phases/</code> with one file per phase from Phase 0 through Phase 11.</li>
     <li>Added this progress page so future agents can resume from explicit project state.</li>
     <li>Initialized the repository on the <code>main</code> branch for GitHub maintenance.</li>
+    <li>Configured <code>origin</code> as <code>git@github.com:nlospc/next-generation-language-tutor.git</code>.</li>
+    <li>Created the initial local git commit.</li>
   </ul>
 
   <h2>Files changed</h2>
@@ -44,7 +46,7 @@
   <h2>Known issues</h2>
   <ul>
     <li>The repository currently has no package, build, test, or lint scripts.</li>
-    <li>The directory is not currently a git repository, so git status could not be used for change review.</li>
+    <li>SSH push to GitHub is blocked inside the current sandbox unless external network execution is approved.</li>
   </ul>
 
   <h2>Checks</h2>
@@ -56,6 +58,10 @@
     <li>Searched <code>docs/main_design_intend.md</code> and confirmed the navigation index includes Phase 0 through Phase 11.</li>
     <li>Searched this progress page and confirmed it records current status, checks, and next step.</li>
     <li>Initialized git with <code>git init -b main</code>.</li>
+    <li>Created commit <code>e4eb192</code> with the initial agent instructions and design docs.</li>
+    <li>Set remote origin to <code>git@github.com:nlospc/next-generation-language-tutor.git</code>.</li>
+    <li>Attempted <code>git push -u origin main</code>; it failed with SSH port 22 permission denied in the sandbox.</li>
+    <li>Requested escalated network execution for <code>git push -u origin main</code>; automatic approval review timed out.</li>
     <li>No automated build, test, or lint checks are available yet.</li>
   </ul>
 
