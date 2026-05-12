@@ -34,11 +34,11 @@
 
 ## Current phase
 
-当前处于 Phase 0：项目意图固化。
+Phase 0 到 Phase 11 的本地基线已经完成。当前应进入真实试用、反馈整理或下一轮设计。
 
-当前 phase 设计文件：
+最后完成的 phase 设计文件：
 
-- [Phase 0: 项目意图固化](phases/phase-00-project-intent.md)
+- [Phase 11: Legacy Python 处理](phases/phase-11-legacy-python-handling.md)
 
 ## Phase 索引
 

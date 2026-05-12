@@ -1,0 +1,28 @@
+{
+  "name": "next-generation-language-tutor",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Agent-first private language tutor skeleton.",
+  "bin": {
+    "agent-language-tutor": "./bin/agent-language-tutor.mjs"
+  },
+  "scripts": {
+    "help": "node bin/agent-language-tutor.mjs --help",
+    "cli": "node bin/agent-language-tutor.mjs",
+    "migrate": "node bin/agent-language-tutor.mjs migrate",
+    "db": "node bin/agent-language-tutor.mjs db",
+    "gateway": "node bin/agent-language-tutor.mjs gateway",
+    "training": "node bin/agent-language-tutor.mjs training",
+    "llm:enrich": "node bin/agent-language-tutor.mjs llm enrich",
+    "test": "node --test tests/phase2-db.test.mjs tests/phase3-llm.test.mjs tests/phase4-mcp.test.mjs tests/phase5-web.test.mjs tests/phase6-web-crud.test.mjs tests/phase7-native-content.test.mjs tests/phase8-daily-calendar.test.mjs tests/phase9-gateway-telegram.test.mjs tests/phase10-training-memory.test.mjs",
+    "serve:mcp": "node bin/agent-language-tutor.mjs serve:mcp",
+    "serve:web": "node bin/agent-language-tutor.mjs serve:web"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.9.0"
+  }
+}

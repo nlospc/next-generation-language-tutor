@@ -8,7 +8,7 @@
   <h1>Development Progress</h1>
 
   <h2>Current status</h2>
-  <p>Phase 0 is active. The original main design document has been split into phase-specific design files, and the main design file now acts as the navigation index. The project is initialized in git on the <code>main</code> branch with GitHub configured as the remote. The existing GitHub <code>main</code> history has been fetched, merged, and pushed back to GitHub.</p>
+  <p>Phase 11 is complete as a legacy boundary cleanup. The repository now points agents to the active Node/MCP/Web/Gateway architecture, records the old Python Telegram MVP as reference-only behavior, and ignores Python cache/log generated files so they do not look like active implementation. Phase 0 through Phase 11 local baselines are complete; the next step is real local use and feedback.</p>
 
   <h2>Completed work</h2>
   <ul>
@@ -20,12 +20,73 @@
     <li>Created the initial local git commit.</li>
     <li>Fetched GitHub <code>main</code> and merged the existing remote initialization commit, preserving its MIT <code>LICENSE</code>.</li>
     <li>Pushed local <code>main</code> to GitHub and set upstream tracking to <code>origin/main</code>.</li>
+    <li>Created <code>docs/design-intent.md</code> to solidify the agent-first language tutor design intent.</li>
+    <li>Created <code>docs/implementation-slices.md</code> to record the phase-by-phase delivery path.</li>
+    <li>User confirmed the Phase 0 design intent and approved moving forward.</li>
+    <li>Created <code>package.json</code> and <code>package-lock.json</code> for the Node project skeleton.</li>
+    <li>Created <code>tsconfig.json</code> and placeholder TypeScript module directories under <code>src/</code>.</li>
+    <li>Created tracked content directories under <code>content/usage/</code>, <code>content/methods/</code>, and <code>content/agent-playbooks/</code>.</li>
+    <li>Created an offline-verifiable placeholder CLI at <code>bin/agent-language-tutor.mjs</code>.</li>
+    <li>Created <code>Installation Guide for AI Agents.md</code>.</li>
+    <li>Updated <code>docs/main_design_intend.md</code> so the next active phase is Phase 2.</li>
+    <li>Implemented Phase 2 local database baseline with SQLite migrations and CRUD services.</li>
+    <li>Updated CLI so <code>migrate</code> and <code>db</code> commands execute real database behavior.</li>
+    <li>Added tests for migration idempotency, user configuration create/read, and learning item CRUD.</li>
+    <li>Added runtime database ignore rules and kept the <code>data/</code> directory tracked with <code>.gitkeep</code>.</li>
+    <li>Migrated the Phase 2 database layer from Python <code>sqlite3</code> to pure Node <code>better-sqlite3</code>.</li>
+    <li>Replaced Python tests with Node native test runner coverage for migration idempotency and CRUD.</li>
+    <li>Implemented Phase 3 provider baseline with <code>scripts/llm-service.mjs</code> and <code>scripts/llm-cli.mjs</code>.</li>
+    <li>Added deterministic mock enrichment for word, phrase, and sentence, including <code>meaning</code>, <code>usage</code>, <code>example</code>, <code>scenario</code>, and short <code>instant_summary</code>.</li>
+    <li>Added OpenAI-compatible provider shape and schema-based output validation.</li>
+    <li>Added Node tests for prompt contract, schema validation, mock enrichment, and OpenAI provider key requirement.</li>
+    <li>Implemented Phase 4 MCP server v1 in <code>scripts/mcp-server.mjs</code> with stdio JSON-RPC handling.</li>
+    <li>Delivered required MCP tools: <code>initialize_user</code>, <code>add_learning_item</code>, <code>list_learning_items</code>, <code>search_learning_items</code>, <code>update_learning_item</code>, <code>delete_learning_item</code>, and <code>get_daily_status</code>.</li>
+    <li>Connected <code>serve:mcp</code> to start the real MCP server instead of a placeholder.</li>
+    <li>Added automated tests for MCP tool list, required tool flow, search/update, daily status, and JSON-RPC method handling.</li>
+    <li>Implemented Phase 5 Web server and UI shell in <code>scripts/web-server.mjs</code>.</li>
+    <li>Connected <code>serve:web</code> to start a real local Web server.</li>
+    <li>Added local content pages for usage guidance, study methods, and agent playbooks.</li>
+    <li>Added lightweight markdown rendering and content API endpoint.</li>
+    <li>Added Phase 5 automated tests for Web home page and content API.</li>
+    <li>Implemented Phase 6 learning item management page at <code>/items</code> with add, edit, delete, and search/filter.</li>
+    <li>Added Web CRUD APIs: list, create, update, delete, export, and import for learning items.</li>
+    <li>Added Phase 6 automated test to verify Web CRUD flow and MCP list consistency on the same database.</li>
+    <li>Implemented Phase 7 native-language user setting APIs and personalization page at <code>/settings</code>.</li>
+    <li>Added local user content generation endpoint that rewrites usage/method content via LLM provider and saves to <code>content/user/&lt;native_language&gt;/...</code>.</li>
+    <li>Updated content read logic to prefer user-localized content over default content.</li>
+    <li>Added persistence validation across server restart for native-language personalized content.</li>
+    <li>Implemented Phase 8 daily status service with due review count, items added today, training completed count, and completion state.</li>
+    <li>Added check-in calendar calculation with monthly days and current streak.</li>
+    <li>Added Web daily status APIs and a local monthly calendar page at <code>/calendar</code>.</li>
+    <li>Updated MCP <code>get_daily_status</code> to return the same computed daily status used by the Web UI.</li>
+    <li>Added Phase 8 automated tests for daily status, streak calculation, Web API, calendar page, and MCP consistency.</li>
+    <li>Implemented Phase 9 gateway service boundary in <code>scripts/gateway-service.mjs</code>.</li>
+    <li>Added a local Telegram adapter command parser for <code>/start</code>, <code>/add</code>, <code>/list</code>, <code>/study</code>, and <code>/status</code>.</li>
+    <li>Added a Telegram daily reminder hook that reports streak and the smallest next action.</li>
+    <li>Added local <code>gateway telegram</code> CLI simulation for token-free adapter verification.</li>
+    <li>Added Phase 9 automated tests proving the adapter calls injected services, <code>/add</code> matches MCP behavior on the same database, and reminder output includes streak/action guidance.</li>
+    <li>Implemented Phase 10 memory-driven training service with relevant item retrieval and deterministic review, quiz, story, dialogue, and conversation prompt generation.</li>
+    <li>Added <code>generate_training_session</code> to the MCP tool surface so agents can reuse saved memory in practice prompts.</li>
+    <li>Updated Telegram <code>/study</code> to use generated memory-driven training sessions instead of a static first-item prompt.</li>
+    <li>Added Web training page at <code>/training</code> and <code>/api/training-session</code>, including daily training completion recording when saved memory is used.</li>
+    <li>Added local <code>training</code> CLI command for token-free review, quiz, story, dialogue, and conversation session generation.</li>
+    <li>Added Phase 10 automated tests covering training service retrieval, MCP generation, Telegram <code>/study</code>, Web training page/API, and daily training completion.</li>
+    <li>Implemented Phase 11 legacy boundary cleanup without migrating nonexistent Python source code.</li>
+    <li>Added <code>README.md</code> pointing agents to the active Node architecture and local usage commands.</li>
+    <li>Added <code>docs/legacy-python-mvp-behavior.md</code> to preserve old MVP behavior notes and mark Python as reference-only.</li>
+    <li>Updated the agent installation guide and CLI help so they no longer describe the project as a Phase 1 placeholder skeleton.</li>
+    <li>Updated <code>src/db/index.ts</code> to point at the active Node database module instead of the removed Python database entrypoint.</li>
+    <li>Updated ignore rules for Python cache files and local log files.</li>
   </ul>
 
   <h2>Files changed</h2>
   <ul>
     <li><code>docs/main_design_intend.md</code></li>
     <li><code>docs/development-progress.html</code></li>
+    <li><code>README.md</code></li>
+    <li><code>docs/design-intent.md</code></li>
+    <li><code>docs/implementation-slices.md</code></li>
+    <li><code>docs/legacy-python-mvp-behavior.md</code></li>
     <li><code>docs/phases/phase-00-project-intent.md</code></li>
     <li><code>docs/phases/phase-01-project-skeleton.md</code></li>
     <li><code>docs/phases/phase-02-local-database-core-model.md</code></li>
@@ -39,17 +100,61 @@
     <li><code>docs/phases/phase-10-training-memory-reuse.md</code></li>
     <li><code>docs/phases/phase-11-legacy-python-handling.md</code></li>
     <li><code>LICENSE</code></li>
+    <li><code>Installation Guide for AI Agents.md</code></li>
+    <li><code>package.json</code></li>
+    <li><code>package-lock.json</code></li>
+    <li><code>tsconfig.json</code></li>
+    <li><code>bin/agent-language-tutor.mjs</code></li>
+    <li><code>src/core/index.ts</code></li>
+    <li><code>src/db/index.ts</code></li>
+    <li><code>scripts/db-cli.mjs</code></li>
+    <li><code>tests/phase2-db.test.mjs</code></li>
+    <li><code>scripts/llm-service.mjs</code></li>
+    <li><code>scripts/llm-cli.mjs</code></li>
+    <li><code>tests/phase3-llm.test.mjs</code></li>
+    <li><code>scripts/mcp-server.mjs</code></li>
+    <li><code>tests/phase4-mcp.test.mjs</code></li>
+    <li><code>scripts/web-server.mjs</code></li>
+    <li><code>scripts/gateway-service.mjs</code></li>
+    <li><code>tests/phase5-web.test.mjs</code></li>
+    <li><code>content/usage/getting-started.md</code></li>
+    <li><code>content/methods/study-method.md</code></li>
+    <li><code>content/agent-playbooks/enrichment-playbook.md</code></li>
+    <li><code>tests/phase6-web-crud.test.mjs</code></li>
+    <li><code>tests/phase7-native-content.test.mjs</code></li>
+    <li><code>tests/phase8-daily-calendar.test.mjs</code></li>
+    <li><code>tests/phase9-gateway-telegram.test.mjs</code></li>
+    <li><code>tests/phase10-training-memory.test.mjs</code></li>
+    <li><code>scripts/training-service.mjs</code></li>
+    <li><code>content/user/.gitkeep</code></li>
+    <li><code>.gitignore</code></li>
+    <li><code>data/.gitkeep</code></li>
+    <li><code>src/llm/index.ts</code></li>
+    <li><code>src/mcp/index.ts</code></li>
+    <li><code>src/web/index.ts</code></li>
+    <li><code>src/gateways/index.ts</code></li>
+    <li><code>content/usage/.gitkeep</code></li>
+    <li><code>content/methods/.gitkeep</code></li>
+    <li><code>content/agent-playbooks/.gitkeep</code></li>
   </ul>
 
   <h2>Open questions</h2>
   <ul>
-    <li>None for the documentation split.</li>
+    <li>None for the Phase 11 legacy boundary cleanup.</li>
   </ul>
 
   <h2>Known issues</h2>
   <ul>
-    <li>The repository currently has no package, build, test, or lint scripts.</li>
-    <li>None for the current documentation and git setup work.</li>
+    <li>No lint script exists yet.</li>
+    <li>CLI <code>install</code> remains a placeholder from the skeleton phase.</li>
+    <li>The TypeScript source tree is still a skeleton and there is no TypeScript build script yet.</li>
+    <li>OpenAI-compatible provider is implemented but still not wired to gateway (by phase design).</li>
+    <li>MCP server is a minimal stdio JSON-RPC implementation for Phase 4 and may need protocol hardening in later phases.</li>
+    <li>Web UI uses server-rendered HTML and minimal in-page JavaScript only; no frontend framework is used yet.</li>
+    <li>Phase 7 rewrite currently uses deterministic mock LLM provider output by default; OpenAI-compatible rewrite exists but is not default wired for regeneration.</li>
+    <li>Phase 9 implements Telegram command adaptation locally but does not yet run a live Telegram Bot API polling or webhook transport.</li>
+    <li>Phase 10 training generation is deterministic local prompt/task generation; it does not yet call a live LLM to render full stories, dialogues, or conversation replies.</li>
+    <li>No active Python source exists in this repository; only generated Python cache files were seen locally and are now ignored.</li>
   </ul>
 
   <h2>Checks</h2>
@@ -68,10 +173,91 @@
     <li>Fetched <code>origin/main</code> and confirmed the remote initialization commit contains only <code>LICENSE</code>.</li>
     <li>Merged <code>origin/main</code> with <code>--allow-unrelated-histories</code>; no conflicts occurred.</li>
     <li>Ran <code>git push --set-upstream origin main</code>; push succeeded and <code>main</code> now tracks <code>origin/main</code>.</li>
-    <li>No automated build, test, or lint checks are available yet.</li>
+    <li>Read Phase 0 through Phase 11 design files using UTF-8 encoding before drafting the Phase 0 documents.</li>
+    <li>Added <code>docs/design-intent.md</code> and <code>docs/implementation-slices.md</code>.</li>
+    <li>Updated this progress page with the new Phase 0 status, changed files, open question, checks, and next step.</li>
+    <li>Ran <code>Test-Path docs\design-intent.md</code>; it returned <code>True</code>.</li>
+    <li>Ran <code>Test-Path docs\implementation-slices.md</code>; it returned <code>True</code>.</li>
+    <li>Ran <code>git diff --check</code>; it reported only the existing Windows line-ending notice for <code>docs/development-progress.html</code> and no whitespace errors.</li>
+    <li>Ran <code>git status --short</code>; it showed the progress page modified and the two new Phase 0 documents untracked.</li>
+    <li>Read Phase 1 design requirements from <code>docs/phases/phase-01-project-skeleton.md</code>.</li>
+    <li>Ran initial <code>npm install</code> with a TypeScript dev dependency; it failed because sandboxed network access to the npm registry was denied.</li>
+    <li>Requested escalated <code>npm install</code> twice; automatic approval review timed out both times.</li>
+    <li>Removed the external TypeScript dependency from Phase 1 so fresh install and CLI help can be verified offline.</li>
+    <li>Ran <code>npm install</code>; it completed successfully with zero vulnerabilities.</li>
+    <li>Ran <code>npm run help</code>; it printed CLI help with <code>install</code>, <code>migrate</code>, <code>serve:mcp</code>, and <code>serve:web</code>.</li>
+    <li>Ran <code>npm run cli -- install</code>; it printed the Phase 1 install placeholder.</li>
+    <li>Ran <code>npm run migrate</code>; it printed the Phase 2 migration placeholder.</li>
+    <li>Ran <code>npm run serve:mcp</code>; it printed the Phase 4 MCP placeholder.</li>
+    <li>Ran <code>npm run serve:web</code>; it printed the Phase 5 Web placeholder.</li>
+    <li>Ran <code>Test-Path bin\agent-language-tutor.mjs</code>; it returned <code>True</code>.</li>
+    <li>Ran <code>Test-Path package-lock.json</code>; it returned <code>True</code>.</li>
+    <li>Ran <code>git diff --check</code>; it reported only Windows line-ending notices for edited docs and no whitespace errors.</li>
+    <li>Ran <code>git status --short</code>; it showed the Phase 0 and Phase 1 files pending commit.</li>
+    <li>No automated build, test, or lint checks are available yet beyond the CLI checks above.</li>
+    <li>Attempted <code>npm install better-sqlite3</code>; it failed with sandbox network <code>EACCES</code>.</li>
+    <li>Requested escalated <code>npm install better-sqlite3</code> twice; automatic approval review timed out both times.</li>
+    <li>Ran <code>npm run help</code>; CLI help now includes <code>db</code> and Phase 2 database status.</li>
+    <li>Ran <code>npm run migrate</code>; migration succeeded and created <code>data/tutor.db</code> (later removed from git tracking via <code>.gitignore</code>).</li>
+    <li>Ran <code>npm run db -- user-config set native_language en</code>; user config write succeeded.</li>
+    <li>Ran sequential CRUD verification: add, list, update, list, delete, list for <code>learning-item</code>; all expected results were returned.</li>
+    <li>Ran <code>npm test</code>; 3 tests passed (migration idempotent, user config create/read, learning item CRUD).</li>
+    <li>Ran <code>git diff --check</code>; no whitespace errors (only existing Windows line-ending notices on edited docs).</li>
+    <li>Ran <code>git status --short</code>; it shows current pending Phase 0-2 files.</li>
+    <li>User manually ran <code>npm install better-sqlite3</code>; installation succeeded.</li>
+    <li>Replaced Python DB entrypoint with Node module <code>scripts/db-cli.mjs</code> and updated CLI integration.</li>
+    <li>Ran <code>npm run help</code>; help now reports Node SQLite for Phase 2 database behavior.</li>
+    <li>Ran <code>npm run migrate</code>; migration succeeded via Node SQLite.</li>
+    <li>Ran <code>npm run db -- user-config set native_language en</code>; succeeded via Node SQLite.</li>
+    <li>Ran learning item add/list/update/delete CLI verification; all operations succeeded.</li>
+    <li>Ran <code>npm test</code>; Node test runner passed 3/3 tests in <code>tests/phase2-db.test.mjs</code>.</li>
+    <li>Ran <code>npm run llm:enrich -- --type word --text apple</code>; mock enrichment returned required fields.</li>
+    <li>Ran <code>npm run llm:enrich -- --type phrase --text "take it easy"</code>; mock enrichment returned required fields.</li>
+    <li>Ran <code>npm run llm:enrich -- --type sentence --text "I will review this sentence tonight."</code>; mock enrichment returned required fields.</li>
+    <li>Ran <code>npm test</code>; Node test runner passed 9/9 tests including <code>tests/phase3-llm.test.mjs</code>.</li>
+    <li>Ran <code>npm run help</code>; CLI shows <code>serve:mcp</code> as active MCP server command.</li>
+    <li>Ran <code>npm test</code>; Node test runner passed 14/14 tests including <code>tests/phase4-mcp.test.mjs</code>.</li>
+    <li>Ran a direct JSON-RPC tool list check with <code>handleRpcMessage</code>; required MCP tools were returned.</li>
+    <li>Ran <code>npm test</code>; Node test runner passed 16/16 tests including <code>tests/phase5-web.test.mjs</code>.</li>
+    <li>Ran Web server health/content check via in-process startup; <code>/health</code> returned <code>{"ok":true}</code> and usage content returned at least one item.</li>
+    <li>Started local Web server on <code>http://127.0.0.1:4173</code> and verified <code>/health</code> responded successfully.</li>
+    <li>Ran <code>npm test</code>; Node test runner passed 17/17 tests including <code>tests/phase6-web-crud.test.mjs</code>.</li>
+    <li>Ran in-process Web check for <code>/items</code> and <code>/api/learning-items</code>; page returned 200 and API returned valid list data.</li>
+    <li>Validated CRUD state via CLI after tests with <code>npm run db -- learning-item list</code>; local default DB remained clean for this run.</li>
+    <li>Ran <code>npm test</code>; Node test runner passed 18/18 tests including <code>tests/phase7-native-content.test.mjs</code>.</li>
+    <li>Ran native-language flow check: set <code>native_language=fr-FR</code>, regenerate usage content, and confirmed <code>/api/content?section=usage</code> returned localized user content.</li>
+    <li>Added runtime ignore rules for <code>content/user/*</code> while preserving <code>content/user/.gitkeep</code>.</li>
+    <li>Ran <code>npm test</code>; Node test runner passed 21/21 tests including <code>tests/phase8-daily-calendar.test.mjs</code>.</li>
+    <li>Attempted in-app browser verification for <code>/calendar</code>; browser session setup timed out twice, so no visual browser confirmation was recorded.</li>
+    <li>Ran an in-process Web smoke check; <code>/calendar</code> returned 200, <code>/api/check-in-calendar?month=2026-05</code> returned <code>ok: true</code>, and <code>/api/daily-status</code> returned <code>ok: true</code>.</li>
+    <li>Ran <code>npm test</code>; Node test runner passed 24/24 tests including <code>tests/phase9-gateway-telegram.test.mjs</code>.</li>
+    <li>Ran <code>npm run gateway -- telegram /start</code>; local Telegram simulation initialized the user successfully.</li>
+    <li>Attempted <code>npm run gateway -- telegram /add apple "|" "a fruit" "|" cli-demo</code>; PowerShell treated the pipe as shell syntax and the command failed before reaching the adapter.</li>
+    <li>Ran <code>npm run gateway --% -- telegram /add apple "|" "a fruit" "|" cli-demo</code>; local Telegram simulation added the learning item successfully.</li>
+    <li>Ran <code>npm run gateway -- telegram /status</code>; local Telegram simulation returned daily status fields.</li>
+    <li>Ran <code>npm run gateway -- telegram reminder</code>; local Telegram simulation returned streak and smallest next action.</li>
+    <li>Read <code>docs/phases/phase-10-training-memory-reuse.md</code> using UTF-8 encoding before implementing Phase 10.</li>
+    <li>Ran initial <code>npm test</code> after Phase 10 implementation; 27/28 tests passed and the remaining failure was an old Phase 9 <code>/study</code> assertion expecting pre-Phase-10 static wording.</li>
+    <li>Updated the Phase 9 <code>/study</code> test to assert the new memory-driven training response.</li>
+    <li>Ran <code>npm test</code>; Node test runner passed 28/28 tests including <code>tests/phase10-training-memory.test.mjs</code>.</li>
+    <li>Attempted <code>npm run training -- --mode quiz --query apple</code>; it failed because the CLI command existed but the npm script was missing.</li>
+    <li>Added the <code>training</code> npm script.</li>
+    <li>Ran <code>npm run training -- --mode quiz --query apple</code>; it returned a quiz session using the saved <code>apple</code> memory item.</li>
+    <li>Ran <code>npm run gateway -- telegram /study apple</code>; it returned a memory-driven study session using <code>apple</code>.</li>
+    <li>Ran <code>npm test</code> again after adding the npm script; Node test runner passed 28/28 tests.</li>
+    <li>Attempted to start a persistent local Web server on <code>http://127.0.0.1:4173</code>; sandbox escalation review timed out twice, so no persistent server was left running.</li>
+    <li>Ran an in-process Web smoke check; a temporary server returned <code>200</code> for <code>/training</code> and the HTML contained <code>Memory Training</code>.</li>
+    <li>Read <code>docs/phases/phase-11-legacy-python-handling.md</code> using UTF-8 encoding before implementing Phase 11.</li>
+    <li>Listed repository files with <code>rg --files</code>; no active Python source file was present.</li>
+    <li>Searched for Python, legacy, MVP, and outdated database references; found only documentation references, generated Python cache files, and one outdated <code>src/db/index.ts</code> status string.</li>
+    <li>Ran <code>npm test</code>; Node test runner passed 28/28 tests after Phase 11 cleanup.</li>
+    <li>Searched for <code>scripts/db_cli.py</code>, <code>db_cli.py</code>, <code>placeholder commands</code>, and <code>Phase 1</code>; found no stale Python database reference after updating the status string, with remaining Phase references limited to historical docs and the install placeholder command.</li>
+    <li>Ran <code>npm run help</code>; help now reports the current Node runtime status and the legacy Python reference-only boundary.</li>
+    <li>Ran <code>git diff --check</code>; it reported only Windows line-ending notices for edited docs and no whitespace errors.</li>
+    <li>Ran final <code>npm test</code>; Node test runner passed 28/28 tests.</li>
   </ul>
 
   <h2>Next step</h2>
-  <p>Continue Phase 0 by creating <code>docs/design-intent.md</code> and <code>docs/implementation-slices.md</code> from the Phase 0 design file, then ask the user to confirm the design intent before moving to Phase 1.</p>
+  <p>Use the local Node system end to end, collect feedback, then decide the next design cycle. Start with <code>npm test</code>, <code>npm run serve:web</code>, <code>npm run gateway -- telegram /study apple</code>, and <code>npm run training -- --mode quiz --query apple</code>.</p>
 </body>
 </html>
