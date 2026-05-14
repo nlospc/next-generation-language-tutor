@@ -8,7 +8,7 @@
   <h1>Development Progress</h1>
 
   <h2>Current status</h2>
-  <p>Phase 11 is complete as a legacy boundary cleanup. The repository now points agents to the active Node/MCP/Web/Gateway architecture, records the old Python Telegram MVP as reference-only behavior, and ignores Python cache/log generated files so they do not look like active implementation. Phase 0 through Phase 11 local baselines are complete; the next step is real local use and feedback.</p>
+  <p>Phase 11 legacy boundary cleanup remains complete, and a new MCP reliability patch has been applied: the MCP tool schemas now expose explicit argument fields for all core tools, and local native-module test blocking was documented with a rebuild path. Phase 0 through Phase 11 local baselines are complete; the next step is real local use and feedback.</p>
 
   <h2>Completed work</h2>
   <ul>
@@ -77,6 +77,8 @@
     <li>Updated the agent installation guide and CLI help so they no longer describe the project as a Phase 1 placeholder skeleton.</li>
     <li>Updated <code>src/db/index.ts</code> to point at the active Node database module instead of the removed Python database entrypoint.</li>
     <li>Updated ignore rules for Python cache files and local log files.</li>
+    <li>Expanded MCP <code>inputSchema</code> definitions in <code>scripts/mcp-server.mjs</code> so core tools expose explicit arguments (including add/search/update/delete/training/date/user config fields) to clients.</li>
+    <li>Documented native module ABI mismatch handling (<code>npm rebuild better-sqlite3</code>) as an environment-known issue for test triage.</li>
   </ul>
 
   <h2>Files changed</h2>
@@ -155,6 +157,8 @@
     <li>Phase 9 implements Telegram command adaptation locally but does not yet run a live Telegram Bot API polling or webhook transport.</li>
     <li>Phase 10 training generation is deterministic local prompt/task generation; it does not yet call a live LLM to render full stories, dialogues, or conversation replies.</li>
     <li>No active Python source exists in this repository; only generated Python cache files were seen locally and are now ignored.</li>
+    <li>Native module compatibility can block tests: if <code>better-sqlite3</code> was built against a different Node ABI, run <code>npm rebuild better-sqlite3</code> before interpreting test failures.</li>
+    <li>MCP tool argument quality depends on <code>inputSchema</code> richness; <code>scripts/mcp-server.mjs</code> now exposes explicit argument schemas for all core tools, not only <code>add_learning_item</code>.</li>
   </ul>
 
   <h2>Checks</h2>
@@ -255,6 +259,9 @@
     <li>Ran <code>npm run help</code>; help now reports the current Node runtime status and the legacy Python reference-only boundary.</li>
     <li>Ran <code>git diff --check</code>; it reported only Windows line-ending notices for edited docs and no whitespace errors.</li>
     <li>Ran final <code>npm test</code>; Node test runner passed 28/28 tests.</li>
+    <li>Reproduced native module mismatch under Node 18 (<code>NODE_MODULE_VERSION 115 vs 108</code>); executed <code>npm rebuild better-sqlite3</code> successfully.</li>
+    <li>Validated MCP schema surface directly via JSON-RPC <code>tools/list</code>; <code>add_learning_item</code> now exposes <code>term/meaning/notes</code> and other core tools expose explicit properties.</li>
+    <li>Ran targeted MCP tests with <code>node --test tests/phase4-mcp.test.mjs</code>; 5/5 passed.</li>
   </ul>
 
   <h2>Next step</h2>
